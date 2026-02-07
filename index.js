@@ -7,7 +7,6 @@ function randomEL(arr) {
   return arr[randomIndex];
 }
 
-alert("You win when you have 5 points.");
 
 window.addEventListener("keydown", function (e) {
   let userChoose = e.key;

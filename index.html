@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock,Paper,Scissors</title>
-    <script defer src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <!-- <script defer src="./index.js"></script> -->
 </head>
 <body>
-    
+    <div class="container">
+        <h1>🎮 Rock, Paper, Scissors Game 🎮</h1>
+        <div class="score_board">
+            <div class="score">
+                <p class="score_heading">Kompüter Qələbəsi</p>
+                <p class="comp_score">0</p>
+            </div>
+            <div class="score">
+                <p class="score_heading">Cari Hesab</p>
+                <p><span class="comp_score">0</span> - <span class="user_score">0</span></p>
+            </div>
+            <div class="score">
+                <p class="score_heading">Sizin Qələbəniz</p>
+                <p class="user_score">0</p>
+            </div>
+        </div>
+        <div class="battle_area">
+            <div class="user_area area">
+                <div class="area_heading">Siz</div>
+                <div class="area_container">❓</div>
+            </div>
+            <div class="vs_area area"><p>vs</p></div>
+            <div class="comp_area area">
+                <div class="area_heading">Kompüter</div>
+                <div class="area_container">❓</div>
+            </div>
+        </div>
+        <div class="control_area">
+            <div class="choices">
+                <div class=" choice rock">📄</div>
+                <div class=" choice paper">🪨</div>
+                <div class=" choice scissors">✂️</div>
+            </div>
+            <p class="message">Seçiminizi edin!</p>
+        </div>
+    </div>
 </body>
 </html>
