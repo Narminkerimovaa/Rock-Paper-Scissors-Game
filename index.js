@@ -1,59 +1,71 @@
 const rules = ["r", "p", "s"];
+let userScoreEl = document.querySelector(".user_score");
+let compScoreEl = document.querySelector(".comp_score");
+let rockEl = document.querySelector(".rock");
+let paperEl = document.querySelector(".paper");
+let scissorsEl = document.querySelector(".scissors");
+let computerChoice = document.querySelector(".computer_element");
+let userChoiceEl = document.querySelector(".user_element");
+let message = document.querySelector(".message");
+let userWonEl = document.querySelector(".user_won");
+let compWonEl = document.querySelector(".comp_won");
+let compChoice = "";
+let userChoice = {};
 let userScore = 0;
 let compScore = 0;
+let userWon = 0;
+let compWon = 0;
 
-function randomEL(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
+const elements = {
+  paper: "📄",
+  rock: "🪨",
+  scissors: "✂️",
+};
+
+function randomObj(obj) {
+  const keys = Object.keys(obj);
+  const randomKey = keys[Math.floor(Math.random() * keys.length)];
+  return { key: randomKey, value: obj[randomKey] };
 }
 
-
-window.addEventListener("keydown", function (e) {
-  let userChoose = e.key;
-  let compChoose = randomEL(rules);
-
-  if (!rules.includes(userChoose)) {
-    alert("Please choose: r, p, s");
-    return;
-  }
-
-
-  if (userChoose == "r" && compChoose == "s") {
+function handleGameResult() {
+  const winMap = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
+  if (winMap[userChoice.key] == compChoice.key) {
     userScore++;
-    console.log("Win");
-    console.log("Your score:", userScore);
-    console.log("Computer Score:", compScore);
-    console.log("------------------");
-  } else if (userChoose == "s" && compChoose == "p") {
-    userScore++;
-    console.log("Win");
-    console.log("Your score:", userScore);
-    console.log("Computer Score:", compScore);
-    console.log("------------------");
-  } else if (userChoose == "p" && compChoose == "r") {
-    userScore++;
-    console.log("Win");
-    console.log("Your score:", userScore);
-    console.log("Computer Score:", compScore);
-    console.log("------------------");
-  } else if (userChoose == compChoose) {
-    console.log("Draf-Draf");
-    console.log("Your score:", userScore);
-    console.log("Computer Score:", compScore);
-    console.log("------------------");
+    message.innerHTML = "🎉 You won!";
+  } else if (userChoice.key == compChoice.key) {
+    message.innerHTML = "🤝 Equal!";
   } else {
     compScore++;
-    console.log("Lose");
-    console.log("Your score:", userScore);
-    console.log("Computer Score:", compScore);
-    console.log("------------------");
+    message.innerHTML = "😔 You lost!";
   }
-
-    if (userScore == 5) {
-    console.log("You win!!!");
-    return;
+  if (userScore == 5) {
+    userWon++;
+    userScore = 0;
+    compScore = 0;
   } else if (compScore == 5) {
-    console.log("You lose!!!");
-    return;
+    compWon++;
+    compScore = 0;
+    userScore = 0;
   }
-});
+}
+
+function renderResult(element, obj) {
+  userChoice = { key: element, value: obj[element] };
+  userChoiceEl.innerHTML = `${obj[element]}`;
+  compChoice = randomObj(obj);
+  computerChoice.innerHTML = `${compChoice.value}`;
+  handleGameResult();
+  userWonEl.innerHTML = `${userWon}`;
+  compWonEl.innerHTML = `${compWon}`;
+  compScoreEl.innerHTML = `${compScore}`;
+  userScoreEl.innerHTML = `${userScore}`;
+}
+
+rockEl.addEventListener("click", () => renderResult("rock", elements));
+paperEl.addEventListener("click", () => renderResult("paper", elements));
+scissorsEl.addEventListener("click", () => renderResult("scissors", elements));
